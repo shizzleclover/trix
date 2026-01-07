@@ -1,0 +1,34 @@
+{
+  "name": "tailwind",
+  "type": "addon",
+  "files": [
+    {
+      "source": "frontend/modules/styling/tailwind/tailwind.config.js",
+      "destination": "tailwind.config.js",
+      "type": "copy"
+    },
+    {
+      "source": "frontend/modules/styling/tailwind/postcss.config.js",
+      "destination": "postcss.config.js",
+      "type": "copy"
+    },
+    {
+      "source": "frontend/modules/styling/tailwind/styles/globals.css",
+      "destination": "src/index.css",
+      "type": "template"
+    }
+  ],
+  "dependencies": {
+    "prod": {},
+    "dev": {
+      "tailwindcss": "^3.4.0",
+      "postcss": "^8.4.32",
+      "autoprefixer": "^10.4.16"
+    }
+  },
+  "scripts": {},
+  "postInstall": [
+    "Tailwind CSS configured successfully",
+    "Edit tailwind.config.js to customize your design system"
+  ]
+}

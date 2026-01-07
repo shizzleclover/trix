@@ -1,0 +1,60 @@
+import { PackageManager } from './package-managers';
+
+export type ProjectType = 'frontend' | 'backend' | 'fullstack';
+
+export type FrontendFramework = 'react' | 'vue' | 'svelte' | 'angular' | 'astro' | 'solid';
+export type StylingFramework = 'vanilla' | 'tailwind' | 'bootstrap' | 'css-modules' | 'styled-components' | 'emotion';
+export type FrontendAuthProvider = 'privy' | 'clerk' | 'auth0' | 'supabase' | 'firebase' | 'none';
+export type UIComponentLibrary = 'shadcn' | 'daisyui' | 'material-ui' | 'chakra' | 'ant-design' | 'none';
+export type StateManagement = 'zustand' | 'redux' | 'jotai' | 'recoil' | 'mobx' | 'none';
+export type APIClient = 'tanstack-query' | 'swr' | 'axios' | 'fetch';
+
+export type BackendRuntime = 'node' | 'bun' | 'deno';
+export type BackendFramework = 'express' | 'fastify' | 'nestjs' | 'hono' | 'koa' | 'elysia' | 'oak';
+export type Database = 'postgresql' | 'mysql' | 'mongodb' | 'sqlite' | 'redis' | 'none';
+export type ORM = 'prisma' | 'drizzle' | 'typeorm' | 'sequelize' | 'mongoose' | 'none';
+export type BackendAuthStrategy = 'jwt' | 'passport' | 'lucia' | 'clerk' | 'supabase' | 'none';
+export type APIType = 'rest' | 'graphql' | 'trpc';
+export type ValidationLibrary = 'zod' | 'joi' | 'yup' | 'none';
+
+export interface BaseConfig {
+  projectName: string;
+  projectType: ProjectType;
+  packageManager: PackageManager;
+  typescript: boolean;
+  git: boolean;
+  targetDirectory: string;
+}
+
+export interface FrontendConfig extends BaseConfig {
+  projectType: 'frontend';
+  framework: FrontendFramework;
+  styling: StylingFramework;
+  auth: FrontendAuthProvider;
+  uiComponents: UIComponentLibrary[];
+  stateManagement: StateManagement;
+  apiClient: APIClient;
+  routing: boolean;
+  pwa: boolean;
+  testing: boolean;
+}
+
+export interface BackendConfig extends BaseConfig {
+  projectType: 'backend';
+  runtime: BackendRuntime;
+  framework: BackendFramework;
+  database: Database;
+  orm: ORM;
+  auth: BackendAuthStrategy;
+  apiType: APIType;
+  validation: ValidationLibrary;
+  fileUpload: boolean;
+  email: boolean;
+  queue: boolean;
+  cache: boolean;
+  testing: boolean;
+  logging: boolean;
+  docker: boolean;
+}
+
+export type ProjectConfig = FrontendConfig | BackendConfig;
