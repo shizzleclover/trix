@@ -7,7 +7,7 @@ import {
     BackendAuthStrategy,
     APIType,
     ValidationLibrary
-} from '../../types';
+} from '../../types/index.js';
 
 export class BackendPrompts {
     async collect() {

@@ -1,4 +1,4 @@
-import { TrixCLI } from './core/cli';
+import { TrixCLI } from './core/cli.js';
 
 const cli = new TrixCLI();
 const args = process.argv.slice(2);

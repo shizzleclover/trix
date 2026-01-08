@@ -1,3 +1,3 @@
-export * from './config';
-export * from './template';
-export * from './package-manager';
+export * from './config.js';
+export * from './template.js';
+export * from './package-manager.js';

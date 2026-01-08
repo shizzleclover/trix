@@ -1,0 +1,40 @@
+{
+    "name": "mongoose",
+    "type": "orm",
+    "files": [
+        {
+            "source": "backend/modules/orm/mongoose/src/lib/mongoose.ts",
+            "destination": "src/lib/mongoose.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "mongoose": "^8.0.3"
+        },
+        "dev": {}},
+    "injections": [
+        {
+            "file": "src/index.ts",
+            "position": "import",
+            "code": "import { connectDB } from './lib/mongoose';"
+        },
+        {
+            "file": "src/server.ts",
+            "position": "import",
+            "code": "import { connectDB } from './lib/mongoose';"
+        },
+        {
+            "file": "src/index.ts",
+            "position": "custom",
+            "marker": "app.listen",
+            "code": "connectDB();"
+        },
+        {
+            "file": "src/server.ts",
+            "position": "custom",
+            "marker": "app.listen",
+            "code": "await connectDB();"
+        }
+    ]
+}

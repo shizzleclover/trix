@@ -6,7 +6,7 @@ import {
   UIComponentLibrary,
   StateManagement,
   APIClient
-} from '../../types';
+} from '../../types/index.js';
 
 export class FrontendPrompts {
   async collect() {

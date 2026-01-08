@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { CodeInjection } from '../types/template';
+import { CodeInjection } from '../types/template.js';
 
 export class CodeInjector {
     async applyInjections(injections: CodeInjection[], targetDir: string): Promise<void> {

@@ -1,0 +1,28 @@
+{
+  "name": "tailwind",
+  "type": "styling",
+  "files": [
+    {
+      "source": "frontend/modules/styling/tailwind/tailwind.config.ts",
+      "destination": "tailwind.config.js",
+      "type": "template"
+    },
+    {
+      "source": "frontend/modules/styling/tailwind/postcss.config.js",
+      "destination": "postcss.config.js",
+      "type": "template"
+    },
+    {
+      "source": "frontend/modules/styling/tailwind/index.css",
+      "destination": "src/index.css",
+      "type": "template"
+    }
+  ],
+  "dependencies": {
+    "prod": {},
+    "dev": {
+      "tailwindcss": "^3.4.1",
+      "postcss": "^8.4.35",
+      "autoprefixer": "^10.4.17"}},
+  "injections": []
+}

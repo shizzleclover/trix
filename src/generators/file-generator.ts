@@ -1,10 +1,14 @@
 import fs from 'fs-extra';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 import Handlebars from 'handlebars';
-import { ResolvedConfig } from '../core/config-builder';
-import { ProjectConfig, FrontendConfig, BackendConfig } from '../types/config';
-import { CodeInjector } from './code-injector';
-import { PACKAGE_MANAGER_CONFIGS } from '../installers/package-manager';
+import { ResolvedConfig } from '../core/config-builder.js';
+import { ProjectConfig, FrontendConfig, BackendConfig } from '../types/config.js';
+import { CodeInjector } from './code-injector.js';
+import { PACKAGE_MANAGER_CONFIGS } from '../installers/package-manager.js';
 
 export class FileGenerator {
     private handlebars: typeof Handlebars;
@@ -35,8 +39,12 @@ export class FileGenerator {
                 continue;
             }
 
-            const sourcePath = path.join(__dirname, '../templates', file.source);
-            const destPath = path.join(config.targetDirectory, file.destination);
+            const sourcePath = path.join(__dirname, '../../templates', file.source);
+
+            // Render destination path as a template
+            const destSubPathTmpl = this.handlebars.compile(file.destination);
+            const renderedDestSubPath = destSubPathTmpl(config);
+            const destPath = path.join(config.targetDirectory, renderedDestSubPath);
 
             await fs.ensureDir(path.dirname(destPath));
 
