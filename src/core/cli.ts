@@ -32,6 +32,7 @@ export class TrixCLI {
 
   async run(args: string[]): Promise<void> {
     try {
+      // Version check is handled by Commander in index.ts
       this.displayWelcome();
 
       const projectName = args[0] || await this.initialPrompts.getProjectName();
