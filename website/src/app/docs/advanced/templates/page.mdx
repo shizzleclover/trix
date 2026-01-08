@@ -1,0 +1,37 @@
+# Custom Templates
+
+Creating your own templates allows you to standardize the way your team starts new projects.
+
+## Creating a Module
+
+1. **Create Directory**: Add a new folder under `templates/` (e.g., `templates/frontend/modules/my-cool-feature`).
+2. **Add Files**: Put your boilerplate code in this directory. Use `.hbs` extension for Handlebars processing.
+3. **Define Manifest**: Create a `module.json` file.
+
+## Handlebars Variables
+
+Trix provides several variables to your templates:
+
+- `{{projectName}}`: The name of the new project.
+- `{{typescript}}`: Boolean indicating if TypeScript is enabled.
+- `{{framework}}`: The name of the selected framework.
+- `{{packageManager}}`: The tool being used (`npm`, `pnpm`, etc.).
+
+### Example Template
+
+```typescript
+// src/config.ts
+export const config = {
+  name: "{{projectName}}",
+  version: "1.0.0",
+  {{#if typescript}}
+  type: "typescript"
+  {{else}}
+  type: "javascript"
+  {{/if}}
+};
+```
+
+## Integrating with the CLI
+
+To make your new template available in the prompts, you'll need to update the relevant prompt logic in `src/prompts/`.

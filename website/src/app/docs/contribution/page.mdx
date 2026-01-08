@@ -1,0 +1,50 @@
+# Contribution Guide
+
+We're thrilled that you're interested in contributing to Trix! As an open-source project, we rely on the community to help us expand our template library and improve the CLI experience.
+
+## Getting Involved
+
+### Reporting Bugs
+If you find a bug, please [open an issue](https://github.com/your-repo/trix/issues) with as much detail as possible, including your environment and steps to reproduce.
+
+### Suggesting Features
+Have an idea for a new template or module? Let us know in the issues!
+
+---
+
+## Development Setup
+
+To start developing locally, follow these steps:
+
+1. **Fork and Clone**:
+   ```bash
+   git clone https://github.com/your-user/trix.git
+   cd trix
+   ```
+2. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+3. **Build the CLI**:
+   ```bash
+   npm run build
+   ```
+4. **Link for Testing**:
+   ```bash
+   npm link
+   ```
+
+Now you can run `create-trix` from any directory to test your changes.
+
+## Project Structure
+
+- `src/core/`: Core CLI logic and configuration building.
+- `src/prompts/`: All interactive prompt definitions.
+- `templates/`: Handlebars templates for all frameworks and modules.
+- `src/generators/`: Logic for generating files and injecting code.
+
+## Adding a New Template
+
+Templates are located in the `templates/` directory. Each template must have a `module.json` file that defines its files, dependencies, and instructions for the CLI.
+
+For more details on the template system, check out the [Advanced Guide](/docs/advanced/templates).

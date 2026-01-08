@@ -1,0 +1,36 @@
+# Commands
+
+The Trix CLI provides a straightforward set of commands to manage your project generation.
+
+## `create-trix`
+
+The main command to start the interactive project generator.
+
+```bash
+create-trix [project-name]
+```
+
+### Arguments
+
+- `project-name` (Optional): The name of the directory to be created. If omitted, you will be prompted to enter it.
+
+### Flags
+
+- `-V, --version`: Output the version number.
+- `-h, --help`: Display help for the command.
+
+---
+
+## Interactive Prompts
+
+When running `create-trix`, you will be guided through several choice points:
+
+1. **Project Type**: 
+   - `Frontend`: SPAs and web applications.
+   - `Backend`: APIs and server-side logic.
+2. **Framework**: 
+   - **Frontend**: React, Vue 3, Svelte 4.
+   - **Backend**: Express, Fastify, NestJS.
+3. **TypeScript**: Always recommended! (Select 'Yes' or 'No').
+4. **Package Manager**: Choose your preferred tool (`npm`, `yarn`, `pnpm`, or `bun`).
+5. **Add-ons**: Select from various modules like Auth, Databases, and Styling.
