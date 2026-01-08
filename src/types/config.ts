@@ -1,4 +1,4 @@
-import { PackageManager } from './package-manager';
+import { PackageManager } from './package-manager.js';
 
 export type ProjectType = 'frontend' | 'backend' | 'fullstack';
 

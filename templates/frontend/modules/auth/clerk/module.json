@@ -1,0 +1,27 @@
+{
+    "name": "clerk",
+    "type": "auth",
+    "files": [],
+    "dependencies": {
+        "prod": {
+            "@clerk/clerk-react": "^4.30.3"
+        },
+        "dev": {}},
+    "injections": [
+        {
+            "file": "src/main.tsx",
+            "position": "import",
+            "code": "import { ClerkProvider } from '@clerk/clerk-react';\n\nconst PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;\n\nif (!PUBLISHABLE_KEY) {\n  throw new Error('Missing Publishable Key');\n}"
+        },
+        {
+            "file": "src/main.tsx",
+            "position": "provider",
+            "code": "<ClerkProvider publishableKey={PUBLISHABLE_KEY}>"
+        },
+        {
+            "file": ".env",
+            "position": "append",
+            "code": "VITE_CLERK_PUBLISHABLE_KEY=\"pk_test_...\""
+        }
+    ]
+}

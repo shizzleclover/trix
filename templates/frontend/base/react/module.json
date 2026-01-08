@@ -1,0 +1,41 @@
+{
+  "name": "react-base",
+  "type": "base",
+  "framework": "react",
+  "files": [
+    {
+      "source": "frontend/base/react/src/App.tsx",
+      "destination": "src/App.{{#if typescript}}tsx{{else}}jsx{{/if}}",
+      "type": "template"
+    },
+    {
+      "source": "frontend/base/react/src/main.tsx",
+      "destination": "src/main.{{#if typescript}}tsx{{else}}jsx{{/if}}",
+      "type": "template"
+    },
+    {
+      "source": "frontend/base/react/index.html",
+      "destination": "index.html",
+      "type": "template"
+    },
+    {
+      "source": "frontend/base/react/vite.config.ts",
+      "destination": "vite.config.{{#if typescript}}ts{{else}}js{{/if}}",
+      "type": "template"
+    }
+  ],
+  "dependencies": {
+    "prod": {
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+    },
+    "dev": {
+      "@vitejs/plugin-react": "^4.2.1",
+      "vite": "^5.0.8",
+      "@types/react": "^18.2.43",
+      "@types/react-dom": "^18.2.17"}},
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext js,jsx,ts,tsx"}}

@@ -1,0 +1,42 @@
+# Configuration
+
+Trix uses a modular configuration system that allows for deep customization while maintaining a clean project structure.
+
+## `module.json`
+
+Every template in Trix is governed by a `module.json` file. This file acts as the manifest for that specific module.
+
+### Core Properties
+
+- **`name`**: The unique identifier for the module.
+- **`type`**: Either `base` (for framework foundations) or `addon` (for features like Auth or UI).
+- **`files`**: An array of file mapping objects.
+- **`dependencies`**: npm packages required by this module.
+- **`scripts`**: Commands to be added to the generated `package.json`.
+
+### File Mappings
+
+Each entry in the `files` array specifies how a template file should be moved to the target project.
+
+```json
+{
+  "source": "path/to/template.hbs",
+  "destination": "src/main.ts",
+  "type": "template"
+}
+```
+
+- **`source`**: The path relative to the module directory.
+- **`destination`**: The path relative to the project root.
+- **`type`**: `template` (processed by Handlebars) or `static` (copied literally).
+
+---
+
+## Code Injection
+
+Trix uses a unique "Marker" system to inject code into existing files. This allows modules to "plug in" to base templates without complex AST parsing.
+
+Common markers include:
+- `// [marker:imports]`
+- `// [marker:providers]`
+- `// [marker:main]`

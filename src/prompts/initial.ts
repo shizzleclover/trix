@@ -1,7 +1,7 @@
 import inquirer from 'inquirer';
 import fs from 'fs-extra';
-import { ProjectType, PackageManager } from '../types';
-import { PackageManagerDetector } from '../installers/package-manager';
+import { ProjectType, PackageManager } from '../types/index.js';
+import { PackageManagerDetector } from '../installers/package-manager.js';
 
 export class InitialPrompts {
   async getProjectType(): Promise<ProjectType> {

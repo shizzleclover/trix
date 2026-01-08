@@ -1,0 +1,17 @@
+{
+    "name": "zustand",
+    "type": "state-management",
+    "files": [
+        {
+            "source": "frontend/modules/state-management/zustand/useStore.ts",
+            "destination": "src/store/useStore.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "zustand": "^4.4.7"
+        },
+        "dev": {}},
+    "injections": []
+}

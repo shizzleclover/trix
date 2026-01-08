@@ -1,0 +1,15 @@
+{
+    "name": "sqlite",
+    "type": "database",
+    "files": [],
+    "dependencies": {
+        "prod": {},
+        "dev": {}},
+    "injections": [
+        {
+            "file": ".env",
+            "position": "append",
+            "code": "DATABASE_URL=\"file:./dev.db\""
+        }
+    ]
+}

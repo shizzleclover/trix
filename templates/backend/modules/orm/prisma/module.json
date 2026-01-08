@@ -1,0 +1,33 @@
+{
+    "name": "prisma",
+    "type": "orm",
+    "files": [
+        {
+            "source": "backend/modules/orm/prisma/schema.prisma",
+            "destination": "prisma/schema.prisma",
+            "type": "template"
+        },
+        {
+            "source": "backend/modules/orm/prisma/client.ts",
+            "destination": "src/lib/prisma.ts",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "@prisma/client": "^5.7.1"
+        },
+        "dev": {
+            "prisma": "^5.7.1"}},
+    "injections": [
+        {
+            "file": "src/index.ts",
+            "position": "import",
+            "code": "import { prisma } from './lib/prisma';"
+        }
+    ],
+    "postInstall": [
+        "Run `npx prisma generate` to generate the client.",
+        "Run `npx prisma db push` to push the schema to the database."
+    ]
+}

@@ -1,6 +1,7 @@
 {
   "name": "create-trix",
   "version": "1.0.0",
+  "type": "module",
   "description": "Universal project scaffolding CLI for frontend and backend applications",
   "keywords": [
     "cli",

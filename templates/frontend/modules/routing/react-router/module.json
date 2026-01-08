@@ -1,0 +1,22 @@
+{
+    "name": "react-router",
+    "type": "routing",
+    "files": [],
+    "dependencies": {
+        "prod": {
+            "react-router-dom": "^6.21.1"
+        },
+        "dev": {}},
+    "injections": [
+        {
+            "file": "src/main.tsx",
+            "position": "import",
+            "code": "import { BrowserRouter } from 'react-router-dom';"
+        },
+        {
+            "file": "src/main.tsx",
+            "position": "provider",
+            "code": "<BrowserRouter>"
+        }
+    ]
+}

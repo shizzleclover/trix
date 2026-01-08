@@ -1,26 +1,26 @@
-import { ProjectConfig } from './config';
+import { ProjectConfig } from './config.js';
 
 export interface TemplateModule {
   name: string;
   type: 'base' | 'addon';
   framework?: string;
-  
+
   files: TemplateFile[];
-  
+
   dependencies: {
     prod: Record<string, string>;
     dev: Record<string, string>;
   };
-  
+
   scripts?: Record<string, string>;
-  
+
   configs?: Record<string, any>;
-  
+
   injections?: CodeInjection[];
-  
+
   compatibleWith?: string[];
   incompatibleWith?: string[];
-  
+
   postInstall?: string[];
 }
 

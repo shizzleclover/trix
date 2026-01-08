@@ -1,0 +1,17 @@
+{
+    "name": "mysql",
+    "type": "database",
+    "files": [],
+    "dependencies": {
+        "prod": {
+            "mysql2": "^3.7.0"
+        },
+        "dev": {}},
+    "injections": [
+        {
+            "file": ".env",
+            "position": "append",
+            "code": "DATABASE_URL=\"mysql://johndoe:randompassword@localhost:3306/mydb\""
+        }
+    ]
+}
