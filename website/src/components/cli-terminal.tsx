@@ -45,9 +45,9 @@ export function CLITerminal({
 
     return (
         <div className={`w-full group relative ${className}`}>
-            <div className="bg-[#0b0c14] rounded-lg border border-white/5 overflow-hidden stiff-shadow">
+            <div className="bg-[#0b0c14] rounded-lg border border-border/50 overflow-hidden stiff-shadow">
                 {showControls && (
-                    <div className="h-9 border-b border-white/5 bg-white/5 flex items-center px-4 gap-2">
+                    <div className="h-9 border-b border-border/50 bg-background/5 flex items-center px-4 gap-2">
                         <div className="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-500/40" />
                         <div className="w-2.5 h-2.5 rounded-full bg-amber-500/20 border border-amber-500/40" />
                         <div className="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/40" />

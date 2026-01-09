@@ -116,7 +116,7 @@ export default function DocsLayout({
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
-                                className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                                className="absolute inset-0 dark:bg-black/60 bg-black/30 backdrop-blur-sm"
                                 onClick={() => setSidebarOpen(false)}
                             />
                             <motion.aside
@@ -147,7 +147,7 @@ export default function DocsLayout({
                                                             href={item.href}
                                                             onClick={() => setSidebarOpen(false)}
                                                             className={`flex items-center gap-4 px-4 py-3.5 rounded-2xl text-[14px] font-bold transition-all ${isActive
-                                                                ? "bg-primary text-white shadow-lg shadow-primary/20"
+                                                                ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
                                                                 : "text-muted hover:text-foreground hover:bg-secondary"
                                                                 }`}
                                                         >
@@ -172,10 +172,10 @@ export default function DocsLayout({
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             className="prose prose-slate dark:prose-invert max-w-none 
-                prose-headings:font-black prose-headings:tracking-tighter
-                prose-p:text-[15px] prose-p:leading-relaxed prose-p:font-semibold prose-p:text-muted-foreground/80
-                prose-a:no-underline prose-a:font-bold prose-code:text-primary prose-code:font-bold
-                prose-pre:bg-[#0b0c14] prose-pre:border prose-pre:border-white/5 prose-pre:rounded-3xl"
+                        prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-foreground
+                        prose-p:text-[15px] prose-p:leading-relaxed prose-p:font-semibold prose-p:text-muted-foreground/80
+                        prose-a:no-underline prose-a:font-bold prose-a:text-primary prose-code:text-primary prose-code:font-bold
+                        prose-pre:bg-[var(--color-cli-bg)] prose-pre:border prose-pre:border-border/50 prose-pre:rounded-3xl"
                         >
                             {children}
                         </motion.article>
@@ -183,7 +183,7 @@ export default function DocsLayout({
                         {/* Pagination */}
                         <div className="mt-32 pt-12 border-t border-border/50 flex flex-col sm:flex-row gap-4 items-center justify-between">
                             <Link href="/" className="group flex items-center gap-4 hover:opacity-80 transition-opacity">
-                                <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center font-black group-hover:bg-primary group-hover:text-white transition-all">
+                                <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center font-black group-hover:bg-primary group-hover:text-primary-foreground transition-all">
                                     <ArrowLeft className="w-5 h-5" />
                                 </div>
                                 <div>
@@ -196,7 +196,7 @@ export default function DocsLayout({
                                     <span className="text-[9px] font-black text-muted uppercase tracking-widest block">Next</span>
                                     <span className="text-sm font-bold">Quick Start</span>
                                 </div>
-                                <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center font-black group-hover:bg-primary group-hover:text-white transition-all">
+                                <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center font-black group-hover:bg-primary group-hover:text-primary-foreground transition-all">
                                     <ChevronRight className="w-5 h-5" />
                                 </div>
                             </Link>
@@ -206,7 +206,7 @@ export default function DocsLayout({
             </div>
 
             {/* Mobile TabBar Overlay */}
-            <div className="lg:hidden fixed bottom-4 left-4 right-4 h-14 glass border border-white/5 rounded-2xl flex items-center justify-around px-8 z-40 stiff-shadow">
+            <div className="lg:hidden fixed bottom-4 left-4 right-4 h-14 glass border border-border/50 rounded-2xl flex items-center justify-around px-8 z-40 stiff-shadow">
                 <Link href="/docs" className="flex flex-col items-center gap-0.5 text-primary">
                     <Book className="w-4 h-4" />
                     <span className="text-[8px] font-black uppercase tracking-widest">Docs</span>

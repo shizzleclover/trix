@@ -3,7 +3,8 @@
 import { motion } from "framer-motion"
 import {
     Rocket, Server, Database, Shield, Layout, Settings2, Code2,
-    Terminal, Search, ChevronLeft, ArrowRight, UserPlus, Send, CheckCircle2, History, X
+    Terminal, Search, ChevronLeft, ArrowRight, UserPlus, Send, CheckCircle2, History, X,
+    Zap
 } from "lucide-react"
 import { useState } from "react"
 import Link from "next/link"
@@ -40,7 +41,7 @@ export default function CommunityPage() {
                         <button
                             key={tab}
                             onClick={() => setActiveTab(tab)}
-                            className={`flex-1 flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl text-[13px] font-black transition-all whitespace-nowrap shadow-sm ${activeTab === tab ? "bg-primary text-white" : "text-muted hover:text-foreground hover:bg-white/5 shadow-none"
+                            className={`flex-1 flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl text-[13px] font-black transition-all whitespace-nowrap shadow-sm ${activeTab === tab ? "bg-primary text-primary-foreground" : "text-muted hover:text-foreground hover:bg-secondary/20 shadow-none"
                                 }`}
                         >
                             {tab === "Setup" && <Rocket className="w-4 h-4" />}
@@ -129,7 +130,7 @@ export default function CommunityPage() {
                 </section>
 
                 <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-[calc(100%-3rem)] max-w-sm z-40">
-                    <button className="w-full h-[60px] bg-primary text-white rounded-[1.5rem] font-black text-base flex items-center justify-center shadow-[0_15px_40px_rgba(59,130,246,0.4)] hover:scale-[1.02] active:scale-95 transition-all">
+                    <button className="w-full h-[60px] bg-primary text-primary-foreground rounded-[1.5rem] font-black text-base flex items-center justify-center shadow-[0_15px_40px_rgba(59,130,246,0.4)] hover:scale-[1.02] active:scale-95 transition-all">
                         <Send className="w-5 h-5 mr-3" />
                         Open Pull Request
                     </button>
