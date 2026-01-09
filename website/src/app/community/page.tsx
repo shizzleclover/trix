@@ -3,7 +3,8 @@
 import { motion } from "framer-motion"
 import {
     Rocket, Server, Database, Shield, Layout, Settings2, Code2,
-    Terminal, Search, ChevronLeft, ArrowRight, UserPlus, Send, CheckCircle2, History, X
+    Terminal, Search, ChevronLeft, ArrowRight, UserPlus, Send, CheckCircle2, History, X,
+    Zap
 } from "lucide-react"
 import { useState } from "react"
 import Link from "next/link"
