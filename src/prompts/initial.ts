@@ -12,7 +12,8 @@ export class InitialPrompts {
         message: 'What type of project do you want to create?',
         choices: [
           { name: '🎨  Frontend Application', value: 'frontend' },
-          { name: '⚙️   Backend API', value: 'backend' }
+          { name: '⚙️   Backend API', value: 'backend' },
+          { name: '📱  Mobile Application', value: 'mobile' }
         ]
       }
     ]);

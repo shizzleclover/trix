@@ -1,0 +1,19 @@
+{
+    "name": "axios",
+    "type": "addon",
+    "files": [
+        {
+            "source": "mobile/modules/api-client/axios/src/lib/api.ts.hbs",
+            "destination": "src/lib/api.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "axios": "^1.7.9"
+        },
+        "dev": {}
+    },
+    "scripts": {},
+    "postInstall": []
+}

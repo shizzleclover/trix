@@ -1,0 +1,39 @@
+import { useQuery, useMutation } from '@tanstack/react-query';
+
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3000';
+
+async function fetchData<T>(endpoint: string): Promise<T> {
+        const response = await fetch(`${API_BASE_URL}${endpoint}`);
+        if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+        }
+
+        async function postData<T, R>(endpoint: string, data: T): Promise<R> {
+                const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+                });
+                if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+                }
+
+                // Example usage hooks
+                export function useApiQuery<T>(key: string[], endpoint: string) {
+                    return useQuery<T>({
+                        queryKey: key,
+                        queryFn: () => fetchData<T>(endpoint),
+                            });
+                            }
+
+                            export function useApiMutation<T, R>(endpoint: string) {
+                                return useMutation<R, Error, T>({
+                                    mutationFn: (data: T) => postData<T, R>(endpoint, data),
+                                        });
+                                        }

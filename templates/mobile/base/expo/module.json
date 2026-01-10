@@ -1,0 +1,56 @@
+{
+    "name": "expo-base",
+    "type": "base",
+    "framework": "expo",
+    "files": [
+        {
+            "source": "mobile/base/expo/app.json.hbs",
+            "destination": "app.json",
+            "type": "template"
+        },
+        {
+            "source": "mobile/base/expo/babel.config.js",
+            "destination": "babel.config.js",
+            "type": "copy"
+        },
+        {
+            "source": "mobile/base/expo/tsconfig.json",
+            "destination": "tsconfig.json",
+            "type": "copy"
+        },
+        {
+            "source": "mobile/base/expo/App.tsx.hbs",
+            "destination": "App.{{#if typescript}}tsx{{else}}js{{/if}}",
+            "type": "template"
+        },
+        {
+            "source": "mobile/base/expo/.gitignore",
+            "destination": ".gitignore",
+            "type": "copy"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "expo": "~52.0.0",
+            "expo-status-bar": "~2.0.0",
+            "react": "18.3.1",
+            "react-native": "0.76.5"
+        },
+        "dev": {
+            "@babel/core": "^7.25.2",
+            "@types/react": "~18.3.12",
+            "typescript": "~5.3.3"
+        }
+    },
+    "scripts": {
+        "start": "expo start",
+        "android": "expo start --android",
+        "ios": "expo start --ios",
+        "web": "expo start --web"
+    },
+    "postInstall": [
+        "Run 'npx expo start' to start the development server",
+        "For iOS: Requires Xcode and iOS Simulator",
+        "For Android: Requires Android Studio and Android Emulator"
+    ]
+}

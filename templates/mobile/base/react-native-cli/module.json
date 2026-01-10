@@ -1,0 +1,56 @@
+{
+    "name": "react-native-cli-base",
+    "type": "base",
+    "framework": "react-native-cli",
+    "files": [
+        {
+            "source": "mobile/base/react-native-cli/App.tsx.hbs",
+            "destination": "App.{{#if typescript}}tsx{{else}}js{{/if}}",
+            "type": "template"
+        },
+        {
+            "source": "mobile/base/react-native-cli/tsconfig.json",
+            "destination": "tsconfig.json",
+            "type": "copy"
+        },
+        {
+            "source": "mobile/base/react-native-cli/.gitignore",
+            "destination": ".gitignore",
+            "type": "copy"
+        },
+        {
+            "source": "mobile/base/react-native-cli/babel.config.js",
+            "destination": "babel.config.js",
+            "type": "copy"
+        },
+        {
+            "source": "mobile/base/react-native-cli/metro.config.js",
+            "destination": "metro.config.js",
+            "type": "copy"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "react": "18.3.1",
+            "react-native": "0.76.5"
+        },
+        "dev": {
+            "@babel/core": "^7.25.2",
+            "@babel/preset-env": "^7.25.3",
+            "@babel/runtime": "^7.25.0",
+            "@types/react": "^18.3.12",
+            "typescript": "~5.3.3",
+            "metro-react-native-babel-preset": "^0.77.0"
+        }
+    },
+    "scripts": {
+        "start": "react-native start",
+        "android": "react-native run-android",
+        "ios": "react-native run-ios"
+    },
+    "postInstall": [
+        "Run 'npx react-native start' to start Metro bundler",
+        "For iOS: Run 'cd ios && pod install' then 'npx react-native run-ios'",
+        "For Android: Run 'npx react-native run-android'"
+    ]
+}

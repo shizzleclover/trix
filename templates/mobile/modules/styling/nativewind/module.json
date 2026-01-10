@@ -1,0 +1,37 @@
+{
+    "name": "nativewind",
+    "type": "addon",
+    "files": [
+        {
+            "source": "mobile/modules/styling/nativewind/tailwind.config.js",
+            "destination": "tailwind.config.js",
+            "type": "copy"
+        },
+        {
+            "source": "mobile/modules/styling/nativewind/global.css",
+            "destination": "global.css",
+            "type": "copy"
+        },
+        {
+            "source": "mobile/modules/styling/nativewind/metro.config.js",
+            "destination": "metro.config.js",
+            "type": "copy"
+        },
+        {
+            "source": "mobile/modules/styling/nativewind/nativewind-env.d.ts",
+            "destination": "nativewind-env.d.ts",
+            "type": "copy"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "nativewind": "^4.1.23",
+            "tailwindcss": "^3.4.17"
+        },
+        "dev": {}
+    },
+    "scripts": {},
+    "postInstall": [
+        "NativeWind requires babel plugin configuration - check babel.config.js"
+    ]
+}

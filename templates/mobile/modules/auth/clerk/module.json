@@ -1,0 +1,23 @@
+{
+    "name": "clerk",
+    "type": "addon",
+    "files": [
+        {
+            "source": "mobile/modules/auth/clerk/src/providers/ClerkProvider.tsx.hbs",
+            "destination": "src/providers/ClerkProvider.tsx",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "@clerk/clerk-expo": "^2.4.0",
+            "expo-secure-store": "~14.0.0"
+        },
+        "dev": {}
+    },
+    "scripts": {},
+    "postInstall": [
+        "Add EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY to your .env file",
+        "Wrap your app with ClerkProvider - see src/providers/ClerkProvider.tsx"
+    ]
+}

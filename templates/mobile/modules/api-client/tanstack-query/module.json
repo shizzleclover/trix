@@ -1,0 +1,26 @@
+{
+    "name": "tanstack-query",
+    "type": "addon",
+    "files": [
+        {
+            "source": "mobile/modules/api-client/tanstack-query/src/lib/queryClient.ts.hbs",
+            "destination": "src/lib/queryClient.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        },
+        {
+            "source": "mobile/modules/api-client/tanstack-query/src/hooks/useApi.ts.hbs",
+            "destination": "src/hooks/useApi.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "@tanstack/react-query": "^5.62.0"
+        },
+        "dev": {}
+    },
+    "scripts": {},
+    "postInstall": [
+        "Wrap your app with QueryClientProvider - see src/lib/queryClient.ts"
+    ]
+}

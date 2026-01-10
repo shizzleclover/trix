@@ -1,0 +1,19 @@
+{
+    "name": "zustand",
+    "type": "addon",
+    "files": [
+        {
+            "source": "mobile/modules/state-management/zustand/src/store/index.ts.hbs",
+            "destination": "src/store/index.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "zustand": "^5.0.0"
+        },
+        "dev": {}
+    },
+    "scripts": {},
+    "postInstall": []
+}

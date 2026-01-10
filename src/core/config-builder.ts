@@ -1,6 +1,6 @@
 import { Validator } from './validator.js';
 import { TemplateModule } from '../types/template.js';
-import { ProjectConfig, FrontendConfig, BackendConfig } from '../types/config.js';
+import { ProjectConfig, FrontendConfig, BackendConfig, MobileConfig } from '../types/config.js';
 import { DependencyInstaller } from '../installers/dependency-installer.js';
 import path from 'path';
 import fs from 'fs-extra';
@@ -62,6 +62,8 @@ export class ConfigurationBuilder {
       modules.push(...this.loadFrontendModules(config as FrontendConfig));
     } else if (config.projectType === 'backend') {
       modules.push(...this.loadBackendModules(config as BackendConfig));
+    } else if (config.projectType === 'mobile') {
+      modules.push(...this.loadMobileModules(config as MobileConfig));
     }
 
     return modules;
@@ -153,6 +155,45 @@ export class ConfigurationBuilder {
 
     if (config.docker) {
       modules.push(this.loadModule('backend', 'docker', 'compose'));
+    }
+
+    return modules;
+  }
+
+  private loadMobileModules(config: MobileConfig): TemplateModule[] {
+    const modules: TemplateModule[] = [];
+
+    // Base framework template (expo or react-native-cli)
+    modules.push(this.loadModule('mobile', 'base', config.framework));
+
+    // Navigation
+    if (config.navigation !== 'none') {
+      modules.push(this.loadModule('mobile', 'navigation', config.navigation));
+    }
+
+    // Styling
+    if (config.styling !== 'vanilla') {
+      modules.push(this.loadModule('mobile', 'styling', config.styling));
+    }
+
+    // State management
+    if (config.stateManagement !== 'none') {
+      modules.push(this.loadModule('mobile', 'state-management', config.stateManagement));
+    }
+
+    // API client
+    if (config.apiClient !== 'fetch') {
+      modules.push(this.loadModule('mobile', 'api-client', config.apiClient));
+    }
+
+    // Auth
+    if (config.auth !== 'none') {
+      modules.push(this.loadModule('mobile', 'auth', config.auth));
+    }
+
+    // Testing
+    if (config.testing) {
+      modules.push(this.loadModule('mobile', 'testing', 'jest-rn'));
     }
 
     return modules;

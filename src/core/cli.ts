@@ -1,6 +1,7 @@
 import { InitialPrompts } from '../prompts/initial.js';
 import { FrontendPrompts } from '../prompts/frontend/index.js';
 import { BackendPrompts } from '../prompts/backend/index.js';
+import { MobilePrompts } from '../prompts/mobile/index.js';
 import { ConfigurationBuilder } from './config-builder.js';
 import { FileGenerator } from '../generators/file-generator.js';
 import { DependencyInstaller } from '../installers/dependency-installer.js';
@@ -15,6 +16,7 @@ export class TrixCLI {
   private initialPrompts: InitialPrompts;
   private frontendPrompts: FrontendPrompts;
   private backendPrompts: BackendPrompts;
+  private mobilePrompts: MobilePrompts;
   private configBuilder: ConfigurationBuilder;
   private fileGenerator: FileGenerator;
   private logger: Logger;
@@ -24,6 +26,7 @@ export class TrixCLI {
     this.initialPrompts = new InitialPrompts();
     this.frontendPrompts = new FrontendPrompts();
     this.backendPrompts = new BackendPrompts();
+    this.mobilePrompts = new MobilePrompts();
     this.configBuilder = new ConfigurationBuilder();
     this.fileGenerator = new FileGenerator();
     this.logger = new Logger();
@@ -58,6 +61,9 @@ export class TrixCLI {
       } else if (projectType === 'backend') {
         const backendConfig = await this.backendPrompts.collect();
         projectConfig = { ...baseConfig, ...backendConfig };
+      } else if (projectType === 'mobile') {
+        const mobileConfig = await this.mobilePrompts.collect();
+        projectConfig = { ...baseConfig, ...mobileConfig };
       } else {
         throw new Error('Fullstack not yet implemented');
       }
@@ -153,6 +159,14 @@ export class TrixCLI {
       if (be.database !== 'none') console.log(chalk.white(`  Database: ${be.database}`));
       if (be.orm !== 'none') console.log(chalk.white(`  ORM: ${be.orm}`));
       console.log(chalk.white(`  API Type: ${be.apiType}`));
+    } else if (config.projectType === 'mobile') {
+      const mb = config as any;
+      console.log(chalk.white(`  Framework: ${mb.framework}`));
+      if (mb.navigation !== 'none') console.log(chalk.white(`  Navigation: ${mb.navigation}`));
+      console.log(chalk.white(`  Styling: ${mb.styling}`));
+      if (mb.stateManagement !== 'none') console.log(chalk.white(`  State: ${mb.stateManagement}`));
+      console.log(chalk.white(`  API Client: ${mb.apiClient}`));
+      if (mb.auth !== 'none') console.log(chalk.white(`  Auth: ${mb.auth}`));
     }
 
     console.log('');
