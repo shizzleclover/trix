@@ -1,6 +1,6 @@
 <div align="center">
-  <h1>🚀 TRIX</h1>
-  <p><strong>Universal Project Generator for Modern Web Applications</strong></p>
+  <h1>TRIX</h1>
+  <p><strong>Universal Project Generator for Web & Mobile Applications</strong></p>
 
   [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
   [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/your-repo/trix)
@@ -9,26 +9,35 @@
 
 ---
 
-Trix is a powerful, interactive CLI tool designed to help developers bootstrap full-stack applications in seconds. It provides a curated selection of frameworks, libraries, and modules, all perfectly configured to work together.
+Trix is a powerful, interactive CLI tool designed to help developers bootstrap full-stack and mobile applications in seconds. It provides a curated selection of frameworks, libraries, and modules, all perfectly configured to work together.
 
-## ✨ Key Features
+## Key Features
 
-- ⚛️ **Framework Diversity**: Choose from React, Vue 3, Svelte, Express, Fastify, and NestJS.
-- 🎨 **Modern Styling**: Out-of-the-box support for Tailwind CSS, shadcn/ui, and more.
-- 🔐 **Auth Ready**: Integrated authentication with Clerk, Privy, or custom JWT.
-- � **Data Power**: Easily set up PostgreSQL, MySQL, or MongoDB with Prisma or Mongoose.
-- 🎯 **TypeScript First**: Every single template is built with TypeScript performance and safety in mind.
-- 📦 **Multi-Manager**: Works seamlessly with npm, yarn, pnpm, and bun.
+- **Framework Diversity**: Choose from React, Vue 3, Svelte, Express, Fastify, NestJS, and more.
+- **Mobile Ready**: Build React Native & Expo apps with NativeWind, React Navigation, and more.
+- **Modern Styling**: Out-of-the-box support for Tailwind CSS, NativeWind, shadcn/ui, and more.
+- **Auth Ready**: Integrated authentication with Clerk, Supabase, Firebase, Privy, or custom JWT.
+- **Data Power**: Easily set up PostgreSQL, MySQL, or MongoDB with Prisma or Mongoose.
+- **TypeScript First**: Every single template is built with TypeScript performance and safety in mind.
+- **Multi-Manager**: Works seamlessly with npm, yarn, pnpm, and bun.
 
-## 🛠 Supported Tech Stack
+## Supported Tech Stack
 
-### 🖼️ Frontend
+### Frontend
 - **Frameworks**: React, Vue 3, Svelte 4
 - **Styling**: Tailwind CSS, shadcn/ui, DaisyUI
 - **State**: Zustand, Redux Toolkit
 - **API**: TanStack Query, Axios, SWR
 
-### 🏗️ Backend
+### Mobile
+- **Frameworks**: Expo (Recommended), React Native CLI
+- **Navigation**: React Navigation, Expo Router
+- **Styling**: NativeWind (Tailwind), Tamagui, styled-components
+- **State**: Zustand, Redux, Jotai, MobX, Recoil, Legend State
+- **API**: TanStack Query, Axios, ky
+- **Auth**: Clerk, Supabase, Firebase
+
+### Backend
 - **Runtimes**: Node.js, Bun
 - **Frameworks**: Express, Fastify, NestJS
 - **Database**: PostgreSQL, MySQL, MongoDB
@@ -36,7 +45,7 @@ Trix is a powerful, interactive CLI tool designed to help developers bootstrap f
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 Get your project up and running in minutes:
 
@@ -56,7 +65,7 @@ npm link
 create-trix
 ```
 
-## 📖 Usage
+## Usage
 
 ### Interactive Mode (Recommended)
 Simply run `create-trix` and follow the beautiful terminal prompts to curate your stack.
@@ -74,7 +83,7 @@ create-trix my-new-app
 
 ---
 
-## 🏗 Project Structure
+## Project Structure
 
 - `src/core/` - Core CLI logic & configuration builder.
 - `src/prompts/` - Interactive user experience.
@@ -82,7 +91,7 @@ create-trix my-new-app
 - `src/generators/` - File generation and code injection logic.
 - `src/installers/` - Dependency installation & package manager handling.
 
-## 🧪 Development
+## Development
 
 ### Running Tests
 ```bash
@@ -94,7 +103,7 @@ npm test
 npm run build
 ```
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Whether it's a new template, a bug fix, or a feature request, feel free to open an issue or submit a PR.
 
@@ -104,12 +113,12 @@ We welcome contributions! Whether it's a new template, a bug fix, or a feature r
 4. **Push** to your branch
 5. **Open** a Pull Request
 
-## 📄 License
+## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
 <div align="center">
-  <p>Built with ❤️ for developers by developers.</p>
+  <p>Built with love for developers by developers.</p>
 </div>
