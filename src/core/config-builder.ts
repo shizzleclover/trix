@@ -109,55 +109,78 @@ export class ConfigurationBuilder {
   private loadBackendModules(config: BackendConfig): TemplateModule[] {
     const modules: TemplateModule[] = [];
 
+    // Base module is required
     modules.push(this.loadModule('backend', 'base', `${config.runtime}-${config.framework}`));
 
+    // Optional modules - only load if template exists
     if (config.database !== 'none') {
-      modules.push(this.loadModule('backend', 'database', config.database));
+      this.tryLoadModule(modules, 'backend', 'database', config.database);
     }
 
     if (config.orm !== 'none') {
-      modules.push(this.loadModule('backend', 'orm', config.orm));
+      this.tryLoadModule(modules, 'backend', 'orm', config.orm);
     }
 
     if (config.auth !== 'none') {
-      modules.push(this.loadModule('backend', 'auth', config.auth));
+      this.tryLoadModule(modules, 'backend', 'auth', config.auth);
     }
 
-    modules.push(this.loadModule('backend', 'api-type', config.apiType));
+    // These modules may not exist yet - silently skip if missing
+    this.tryLoadModule(modules, 'backend', 'api-type', config.apiType);
 
     if (config.validation !== 'none') {
-      modules.push(this.loadModule('backend', 'validation', config.validation));
+      this.tryLoadModule(modules, 'backend', 'validation', config.validation);
     }
 
     if (config.fileUpload) {
-      modules.push(this.loadModule('backend', 'file-upload', 'multer'));
+      this.tryLoadModule(modules, 'backend', 'file-upload', 'multer');
     }
 
     if (config.email) {
-      modules.push(this.loadModule('backend', 'email', 'nodemailer'));
+      this.tryLoadModule(modules, 'backend', 'email', 'nodemailer');
     }
 
     if (config.queue) {
-      modules.push(this.loadModule('backend', 'queue', 'bullmq'));
+      this.tryLoadModule(modules, 'backend', 'queue', 'bullmq');
     }
 
     if (config.cache) {
-      modules.push(this.loadModule('backend', 'cache', 'redis'));
+      this.tryLoadModule(modules, 'backend', 'cache', 'redis');
     }
 
     if (config.testing) {
-      modules.push(this.loadModule('backend', 'testing', 'jest'));
+      this.tryLoadModule(modules, 'backend', 'testing', 'jest');
     }
 
     if (config.logging) {
-      modules.push(this.loadModule('backend', 'logging', 'winston'));
+      this.tryLoadModule(modules, 'backend', 'logging', 'winston');
     }
 
     if (config.docker) {
-      modules.push(this.loadModule('backend', 'docker', 'compose'));
+      this.tryLoadModule(modules, 'backend', 'docker', 'compose');
     }
 
     return modules;
+  }
+
+  private tryLoadModule(
+    modules: TemplateModule[],
+    projectType: string,
+    category: string,
+    name: string
+  ): void {
+    const modulePath = this.getModulePath(projectType, category, name);
+    if (fs.existsSync(modulePath)) {
+      modules.push(this.loadModule(projectType, category, name));
+    }
+  }
+
+  private getModulePath(projectType: string, category: string, name: string): string {
+    if (category === 'base') {
+      const nameParts = name.split('-');
+      return path.join(__dirname, '../../templates', projectType, 'base', ...nameParts, 'module.json');
+    }
+    return path.join(__dirname, '../../templates', projectType, 'modules', category, name, 'module.json');
   }
 
   private loadMobileModules(config: MobileConfig): TemplateModule[] {
