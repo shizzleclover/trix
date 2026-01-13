@@ -1,0 +1,32 @@
+{
+    "name": "jest-testing",
+    "type": "addon",
+    "files": [
+        {
+            "source": "backend/modules/testing/jest/jest.config.js",
+            "destination": "jest.config.js",
+            "type": "copy"
+        },
+        {
+            "source": "backend/modules/testing/jest/src/__tests__/example.test.ts",
+            "destination": "src/__tests__/example.test.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {},
+        "dev": {
+            "jest": "^29.7.0",
+            "@types/jest": "^29.5.11",
+            "ts-jest": "^29.1.1"
+        }
+    },
+    "scripts": {
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:coverage": "jest --coverage"
+    },
+    "postInstall": [
+        "Run 'npm test' to run tests"
+    ]
+}

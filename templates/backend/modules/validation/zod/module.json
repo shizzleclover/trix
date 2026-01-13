@@ -1,0 +1,21 @@
+{
+    "name": "zod-validation",
+    "type": "addon",
+    "files": [
+        {
+            "source": "backend/modules/validation/zod/src/lib/validation.ts",
+            "destination": "src/lib/validation.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "zod": "^3.22.4"
+        },
+        "dev": {}
+    },
+    "scripts": {},
+    "postInstall": [
+        "Zod schemas are in src/lib/validation"
+    ]
+}

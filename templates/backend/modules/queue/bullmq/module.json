@@ -1,0 +1,22 @@
+{
+    "name": "bullmq-queue",
+    "type": "addon",
+    "files": [
+        {
+            "source": "backend/modules/queue/bullmq/src/lib/queue.ts",
+            "destination": "src/lib/queue.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "bullmq": "^5.1.0",
+            "ioredis": "^5.3.2"
+        },
+        "dev": {}
+    },
+    "scripts": {},
+    "postInstall": [
+        "Job queue is in src/lib/queue. Requires Redis running on localhost:6379"
+    ]
+}

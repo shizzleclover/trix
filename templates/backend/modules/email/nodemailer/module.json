@@ -1,0 +1,23 @@
+{
+    "name": "nodemailer-email",
+    "type": "addon",
+    "files": [
+        {
+            "source": "backend/modules/email/nodemailer/src/lib/mailer.ts",
+            "destination": "src/lib/mailer.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "nodemailer": "^6.9.8"
+        },
+        "dev": {
+            "@types/nodemailer": "^6.4.14"
+        }
+    },
+    "scripts": {},
+    "postInstall": [
+        "Email service is in src/lib/mailer. Configure SMTP in .env"
+    ]
+}
