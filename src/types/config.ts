@@ -17,13 +17,19 @@ export type BackendAuthStrategy = 'jwt' | 'passport' | 'lucia' | 'clerk' | 'supa
 export type APIType = 'rest' | 'graphql' | 'trpc';
 export type ValidationLibrary = 'zod' | 'joi' | 'yup' | 'none';
 
-// Mobile types
-export type MobileFramework = 'expo' | 'react-native-cli';
+// Mobile types (React Native)
+export type MobileFramework = 'expo' | 'react-native-cli' | 'flutter';
 export type MobileNavigation = 'react-navigation' | 'expo-router' | 'none';
 export type MobileStyling = 'nativewind' | 'styled-components' | 'tamagui' | 'vanilla';
 export type MobileStateManagement = 'zustand' | 'redux' | 'jotai' | 'mobx' | 'recoil' | 'legend-state' | 'none';
 export type MobileAPIClient = 'tanstack-query' | 'axios' | 'ky' | 'fetch';
 export type MobileAuthProvider = 'clerk' | 'supabase' | 'firebase' | 'none';
+
+// Flutter-specific types
+export type FlutterStateManagement = 'riverpod' | 'bloc' | 'provider' | 'getx' | 'none';
+export type FlutterNavigation = 'go-router' | 'auto-route' | 'none';
+export type FlutterHttpClient = 'dio' | 'http' | 'chopper';
+export type FlutterAuthProvider = 'firebase' | 'supabase' | 'none';
 
 export interface BaseConfig {
   projectName: string;
@@ -76,4 +82,15 @@ export interface MobileConfig extends BaseConfig {
   testing: boolean;
 }
 
-export type ProjectConfig = FrontendConfig | BackendConfig | MobileConfig;
+export interface FlutterConfig extends BaseConfig {
+  projectType: 'mobile';
+  framework: 'flutter';
+  stateManagement: FlutterStateManagement;
+  navigation: FlutterNavigation;
+  httpClient: FlutterHttpClient;
+  auth: FlutterAuthProvider;
+  testing: boolean;
+  platforms: ('android' | 'ios' | 'web' | 'windows' | 'macos' | 'linux')[];
+}
+
+export type ProjectConfig = FrontendConfig | BackendConfig | MobileConfig | FlutterConfig;

@@ -5,18 +5,33 @@ import {
     MobileStyling,
     MobileStateManagement,
     MobileAPIClient,
-    MobileAuthProvider
+    MobileAuthProvider,
+    FlutterStateManagement,
+    FlutterNavigation,
+    FlutterHttpClient,
+    FlutterAuthProvider
 } from '../../types/index.js';
 
 export class MobilePrompts {
     async collect() {
         const framework = await this.selectFramework();
+
+        // Flutter has a different prompt flow
+        if (framework === 'flutter') {
+            return this.collectFlutterOptions();
+        }
+
+        // React Native flow
+        return this.collectReactNativeOptions(framework);
+    }
+
+    private async collectReactNativeOptions(framework: MobileFramework) {
         const navigation = await this.selectNavigation(framework);
         const styling = await this.selectStyling();
         const stateManagement = await this.selectStateManagement();
         const apiClient = await this.selectAPIClient();
         const auth = await this.selectAuth();
-        const testing = await this.selectTesting();
+        const testing = await this.selectTesting('React Native Testing Library');
 
         return {
             projectType: 'mobile' as const,
@@ -30,6 +45,26 @@ export class MobilePrompts {
         };
     }
 
+    private async collectFlutterOptions() {
+        const stateManagement = await this.selectFlutterStateManagement();
+        const navigation = await this.selectFlutterNavigation();
+        const httpClient = await this.selectFlutterHttpClient();
+        const auth = await this.selectFlutterAuth();
+        const platforms = await this.selectFlutterPlatforms();
+        const testing = await this.selectTesting('Flutter test');
+
+        return {
+            projectType: 'mobile' as const,
+            framework: 'flutter' as const,
+            stateManagement,
+            navigation,
+            httpClient,
+            auth,
+            platforms,
+            testing
+        };
+    }
+
     private async selectFramework(): Promise<MobileFramework> {
         const { framework } = await inquirer.prompt([
             {
@@ -38,7 +73,8 @@ export class MobilePrompts {
                 message: 'Choose a mobile framework:',
                 choices: [
                     { name: 'Expo (Recommended)', value: 'expo' },
-                    { name: 'React Native CLI', value: 'react-native-cli' }
+                    { name: 'React Native CLI', value: 'react-native-cli' },
+                    { name: 'Flutter (Dart)', value: 'flutter' }
                 ]
             }
         ]);
@@ -67,7 +103,6 @@ export class MobilePrompts {
             { name: 'None', value: 'none' }
         ];
 
-        // Expo Router is only available for Expo projects
         if (framework === 'expo') {
             choices.splice(1, 0, { name: 'Expo Router (File-based)', value: 'expo-router' });
         }
@@ -150,12 +185,109 @@ export class MobilePrompts {
         return auth;
     }
 
-    private async selectTesting(): Promise<boolean> {
+    // Flutter-specific prompts
+    private async selectFlutterStateManagement(): Promise<FlutterStateManagement> {
+        const { stateManagement } = await inquirer.prompt([
+            {
+                type: 'list',
+                name: 'stateManagement',
+                message: 'Choose a state management solution:',
+                choices: [
+                    { name: 'None', value: 'none' },
+                    { name: 'Riverpod (Recommended)', value: 'riverpod' },
+                    { name: 'Bloc', value: 'bloc' },
+                    { name: 'Provider', value: 'provider' },
+                    { name: 'GetX', value: 'getx' }
+                ]
+            }
+        ]);
+
+        return stateManagement;
+    }
+
+    private async selectFlutterNavigation(): Promise<FlutterNavigation> {
+        const { navigation } = await inquirer.prompt([
+            {
+                type: 'list',
+                name: 'navigation',
+                message: 'Choose a navigation solution:',
+                choices: [
+                    { name: 'None (Navigator 2.0)', value: 'none' },
+                    { name: 'go_router (Recommended)', value: 'go-router' },
+                    { name: 'auto_route', value: 'auto-route' }
+                ]
+            }
+        ]);
+
+        return navigation;
+    }
+
+    private async selectFlutterHttpClient(): Promise<FlutterHttpClient> {
+        const { httpClient } = await inquirer.prompt([
+            {
+                type: 'list',
+                name: 'httpClient',
+                message: 'Choose an HTTP client:',
+                choices: [
+                    { name: 'Dio (Recommended)', value: 'dio' },
+                    { name: 'http (Dart standard)', value: 'http' },
+                    { name: 'Chopper (Retrofit-like)', value: 'chopper' }
+                ]
+            }
+        ]);
+
+        return httpClient;
+    }
+
+    private async selectFlutterAuth(): Promise<FlutterAuthProvider> {
+        const { auth } = await inquirer.prompt([
+            {
+                type: 'list',
+                name: 'auth',
+                message: 'Choose an authentication provider:',
+                choices: [
+                    { name: 'None', value: 'none' },
+                    { name: 'Firebase Auth', value: 'firebase' },
+                    { name: 'Supabase Auth', value: 'supabase' }
+                ]
+            }
+        ]);
+
+        return auth;
+    }
+
+    private async selectFlutterPlatforms(): Promise<('android' | 'ios' | 'web' | 'windows' | 'macos' | 'linux')[]> {
+        const { platforms } = await inquirer.prompt([
+            {
+                type: 'checkbox',
+                name: 'platforms',
+                message: 'Select target platforms:',
+                choices: [
+                    { name: 'Android', value: 'android', checked: true },
+                    { name: 'iOS', value: 'ios', checked: true },
+                    { name: 'Web', value: 'web', checked: false },
+                    { name: 'Windows', value: 'windows', checked: false },
+                    { name: 'macOS', value: 'macos', checked: false },
+                    { name: 'Linux', value: 'linux', checked: false }
+                ],
+                validate: (input: string[]) => {
+                    if (input.length === 0) {
+                        return 'Please select at least one platform';
+                    }
+                    return true;
+                }
+            }
+        ]);
+
+        return platforms;
+    }
+
+    private async selectTesting(testFramework: string): Promise<boolean> {
         const { testing } = await inquirer.prompt([
             {
                 type: 'confirm',
                 name: 'testing',
-                message: 'Include testing setup (Jest + React Native Testing Library)?',
+                message: `Include testing setup (${testFramework})?`,
                 default: false
             }
         ]);
