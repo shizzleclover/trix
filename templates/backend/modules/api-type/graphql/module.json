@@ -1,0 +1,27 @@
+{
+    "name": "graphql-api",
+    "type": "addon",
+    "files": [
+        {
+            "source": "backend/modules/api-type/graphql/src/graphql/schema.ts",
+            "destination": "src/graphql/schema.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        },
+        {
+            "source": "backend/modules/api-type/graphql/src/graphql/resolvers.ts",
+            "destination": "src/graphql/resolvers.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "@apollo/server": "^4.10.0",
+            "graphql": "^16.8.1"
+        },
+        "dev": {}
+    },
+    "scripts": {},
+    "postInstall": [
+        "GraphQL schema and resolvers are in src/graphql/"
+    ]
+}

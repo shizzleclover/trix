@@ -1,0 +1,21 @@
+{
+    "name": "winston-logging",
+    "type": "addon",
+    "files": [
+        {
+            "source": "backend/modules/logging/winston/src/lib/logger.ts",
+            "destination": "src/lib/logger.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "winston": "^3.11.0"
+        },
+        "dev": {}
+    },
+    "scripts": {},
+    "postInstall": [
+        "Logger is in src/lib/logger"
+    ]
+}

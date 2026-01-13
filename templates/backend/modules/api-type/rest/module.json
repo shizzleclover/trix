@@ -1,0 +1,13 @@
+{
+    "name": "rest-api",
+    "type": "addon",
+    "files": [],
+    "dependencies": {
+        "prod": {},
+        "dev": {}
+    },
+    "scripts": {},
+    "postInstall": [
+        "REST API is the default - no additional setup needed"
+    ]
+}

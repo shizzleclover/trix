@@ -1,0 +1,23 @@
+{
+    "name": "joi-validation",
+    "type": "addon",
+    "files": [
+        {
+            "source": "backend/modules/validation/joi/src/lib/validation.ts",
+            "destination": "src/lib/validation.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "joi": "^17.12.0"
+        },
+        "dev": {
+            "@types/joi": "^17.2.3"
+        }
+    },
+    "scripts": {},
+    "postInstall": [
+        "Joi schemas are in src/lib/validation"
+    ]
+}

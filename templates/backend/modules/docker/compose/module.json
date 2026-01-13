@@ -1,0 +1,33 @@
+{
+    "name": "docker-compose",
+    "type": "addon",
+    "files": [
+        {
+            "source": "backend/modules/docker/compose/Dockerfile",
+            "destination": "Dockerfile",
+            "type": "template"
+        },
+        {
+            "source": "backend/modules/docker/compose/docker-compose.yml",
+            "destination": "docker-compose.yml",
+            "type": "template"
+        },
+        {
+            "source": "backend/modules/docker/compose/.dockerignore",
+            "destination": ".dockerignore",
+            "type": "copy"
+        }
+    ],
+    "dependencies": {
+        "prod": {},
+        "dev": {}
+    },
+    "scripts": {
+        "docker:build": "docker-compose build",
+        "docker:up": "docker-compose up -d",
+        "docker:down": "docker-compose down"
+    },
+    "postInstall": [
+        "Run 'npm run docker:up' to start containers"
+    ]
+}

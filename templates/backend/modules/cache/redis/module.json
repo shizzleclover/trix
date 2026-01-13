@@ -1,0 +1,21 @@
+{
+    "name": "redis-cache",
+    "type": "addon",
+    "files": [
+        {
+            "source": "backend/modules/cache/redis/src/lib/cache.ts",
+            "destination": "src/lib/cache.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "ioredis": "^5.3.2"
+        },
+        "dev": {}
+    },
+    "scripts": {},
+    "postInstall": [
+        "Redis cache client is in src/lib/cache. Requires Redis running"
+    ]
+}

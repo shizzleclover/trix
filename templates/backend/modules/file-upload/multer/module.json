@@ -1,0 +1,23 @@
+{
+    "name": "multer-upload",
+    "type": "addon",
+    "files": [
+        {
+            "source": "backend/modules/file-upload/multer/src/middleware/upload.ts",
+            "destination": "src/middleware/upload.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "multer": "^1.4.5-lts.1"
+        },
+        "dev": {
+            "@types/multer": "^1.4.11"
+        }
+    },
+    "scripts": {},
+    "postInstall": [
+        "File upload middleware is in src/middleware/upload"
+    ]
+}
