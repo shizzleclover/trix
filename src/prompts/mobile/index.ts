@@ -46,6 +46,7 @@ export class MobilePrompts {
     }
 
     private async collectFlutterOptions() {
+        const architecture = await this.selectFlutterArchitecture();
         const stateManagement = await this.selectFlutterStateManagement();
         const navigation = await this.selectFlutterNavigation();
         const httpClient = await this.selectFlutterHttpClient();
@@ -56,6 +57,7 @@ export class MobilePrompts {
         return {
             projectType: 'mobile' as const,
             framework: 'flutter' as const,
+            architecture,
             stateManagement,
             navigation,
             httpClient,
@@ -63,6 +65,24 @@ export class MobilePrompts {
             platforms,
             testing
         };
+    }
+
+    private async selectFlutterArchitecture(): Promise<'clean' | 'simple' | 'feature-first' | 'mvc'> {
+        const { architecture } = await inquirer.prompt([
+            {
+                type: 'list',
+                name: 'architecture',
+                message: 'Choose an architecture pattern:',
+                choices: [
+                    { name: 'Clean Architecture (Recommended)', value: 'clean' },
+                    { name: 'Feature-First (Simpler)', value: 'feature-first' },
+                    { name: 'MVC (Model-View-Controller)', value: 'mvc' },
+                    { name: 'Simple (Basic folders)', value: 'simple' }
+                ]
+            }
+        ]);
+
+        return architecture;
     }
 
     private async selectFramework(): Promise<MobileFramework> {

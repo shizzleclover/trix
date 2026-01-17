@@ -15,10 +15,13 @@ program
   .description('Universal project scaffolding CLI for frontend and backend applications')
   .version(packageJson.version)
   .argument('[project-name]', 'Name of the project')
-  .action((projectName) => {
+  .option('-y, --yes', 'Skip prompts and use defaults')
+  .option('-t, --type <type>', 'Project type: frontend, backend, mobile')
+  .option('--dry-run', 'Show what would be created without creating files')
+  .action((projectName, options) => {
     const cli = new TrixCLI();
     const args = projectName ? [projectName] : [];
-    cli.run(args).catch((error) => {
+    cli.run(args, options).catch((error) => {
       console.error(error);
       process.exit(1);
     });

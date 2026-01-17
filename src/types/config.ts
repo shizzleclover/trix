@@ -26,6 +26,7 @@ export type MobileAPIClient = 'tanstack-query' | 'axios' | 'ky' | 'fetch';
 export type MobileAuthProvider = 'clerk' | 'supabase' | 'firebase' | 'none';
 
 // Flutter-specific types
+export type FlutterArchitecture = 'clean' | 'simple' | 'feature-first' | 'mvc';
 export type FlutterStateManagement = 'riverpod' | 'bloc' | 'provider' | 'getx' | 'none';
 export type FlutterNavigation = 'go-router' | 'auto-route' | 'none';
 export type FlutterHttpClient = 'dio' | 'http' | 'chopper';
@@ -85,6 +86,7 @@ export interface MobileConfig extends BaseConfig {
 export interface FlutterConfig extends BaseConfig {
   projectType: 'mobile';
   framework: 'flutter';
+  architecture: FlutterArchitecture;
   stateManagement: FlutterStateManagement;
   navigation: FlutterNavigation;
   httpClient: FlutterHttpClient;

@@ -1,0 +1,32 @@
+{
+    "name": "trpc-api",
+    "type": "addon",
+    "files": [
+        {
+            "source": "backend/modules/api-type/trpc/src/trpc/index.ts",
+            "destination": "src/trpc/index.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        },
+        {
+            "source": "backend/modules/api-type/trpc/src/trpc/router.ts",
+            "destination": "src/trpc/router.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        },
+        {
+            "source": "backend/modules/api-type/trpc/src/trpc/context.ts",
+            "destination": "src/trpc/context.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "@trpc/server": "^10.45.0",
+            "zod": "^3.22.4"
+        },
+        "dev": {}
+    },
+    "scripts": {},
+    "postInstall": [
+        "tRPC routes are in src/trpc/. Add procedures to router.ts"
+    ]
+}

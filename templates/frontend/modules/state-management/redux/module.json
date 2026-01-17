@@ -1,0 +1,34 @@
+{
+    "name": "redux-state",
+    "type": "addon",
+    "files": [
+        {
+            "source": "frontend/modules/state-management/redux/src/store/index.ts",
+            "destination": "src/store/index.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        },
+        {
+            "source": "frontend/modules/state-management/redux/src/store/slices/counterSlice.ts",
+            "destination": "src/store/slices/counterSlice.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        },
+        {
+            "source": "frontend/modules/state-management/redux/src/store/hooks.ts",
+            "destination": "src/store/hooks.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "@reduxjs/toolkit": "^2.0.1",
+            "react-redux": "^9.1.0"
+        },
+        "dev": {
+            "@types/react-redux": "^7.1.33"
+        }
+    },
+    "scripts": {},
+    "postInstall": [
+        "Wrap your app with <Provider store={store}>"
+    ]
+}

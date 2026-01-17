@@ -8,10 +8,57 @@ import { FlutterGenerator } from '../generators/flutter-generator.js';
 import { DependencyInstaller } from '../installers/dependency-installer.js';
 import { Logger } from './logger.js';
 import { GitHelper } from '../utils/git.js';
-import { ProjectConfig, FlutterConfig } from '../types/config.js';
+import { ProjectConfig, FlutterConfig, ProjectType } from '../types/config.js';
 import { PACKAGE_MANAGER_CONFIGS } from '../installers/package-manager.js';
 import chalk from 'chalk';
 import ora from 'ora';
+
+export interface CLIOptions {
+  yes?: boolean;
+  type?: ProjectType;
+  dryRun?: boolean;
+}
+
+// Default configurations for non-interactive mode
+const DEFAULTS = {
+  frontend: {
+    projectType: 'frontend' as const,
+    framework: 'react' as const,
+    styling: 'tailwind' as const,
+    uiComponents: ['shadcn'] as const,
+    stateManagement: 'zustand' as const,
+    dataFetching: 'tanstack-query' as const,
+    auth: 'none' as const,
+    testing: false,
+  },
+  backend: {
+    projectType: 'backend' as const,
+    runtime: 'node' as const,
+    framework: 'express' as const,
+    database: 'postgresql' as const,
+    orm: 'prisma' as const,
+    auth: 'jwt' as const,
+    apiType: 'rest' as const,
+    validation: 'zod' as const,
+    fileUpload: false,
+    email: false,
+    queue: false,
+    cache: false,
+    testing: true,
+    logging: true,
+    docker: true,
+  },
+  mobile: {
+    projectType: 'mobile' as const,
+    framework: 'expo' as const,
+    navigation: 'expo-router' as const,
+    styling: 'nativewind' as const,
+    stateManagement: 'zustand' as const,
+    apiClient: 'tanstack-query' as const,
+    auth: 'none' as const,
+    testing: false,
+  },
+};
 
 export class TrixCLI {
   private initialPrompts: InitialPrompts;
@@ -36,17 +83,39 @@ export class TrixCLI {
     this.gitHelper = new GitHelper();
   }
 
-  async run(args: string[]): Promise<void> {
+  async run(args: string[], options: CLIOptions = {}): Promise<void> {
     try {
       // Version check is handled by Commander in index.ts
       this.displayWelcome();
 
-      const projectName = args[0] || await this.initialPrompts.getProjectName();
-      const projectType = await this.initialPrompts.getProjectType();
+      const useDefaults = options.yes || false;
+      const dryRun = options.dryRun || false;
+
+      if (useDefaults) {
+        this.logger.info('Using default configuration (non-interactive mode)');
+      }
+
+      if (dryRun) {
+        this.logger.info('Dry run mode - no files will be created');
+      }
+
+      const projectName = args[0] || (useDefaults ? 'my-app' : await this.initialPrompts.getProjectName());
+      const projectType = options.type || (useDefaults ? 'frontend' : await this.initialPrompts.getProjectType());
 
       let projectConfig: ProjectConfig;
 
-      if (projectType === 'mobile') {
+      if (useDefaults) {
+        // Non-interactive mode - use defaults
+        const defaults = DEFAULTS[projectType as keyof typeof DEFAULTS] || DEFAULTS.frontend;
+        projectConfig = {
+          projectName,
+          typescript: true,
+          packageManager: 'npm',
+          git: true,
+          targetDirectory: `./${projectName}`,
+          ...defaults,
+        } as ProjectConfig;
+      } else if (projectType === 'mobile') {
         // For mobile, ask framework first to determine if Flutter or React Native
         const mobileConfig = await this.mobilePrompts.collect();
 

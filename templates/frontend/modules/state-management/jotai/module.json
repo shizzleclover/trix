@@ -1,0 +1,21 @@
+{
+    "name": "jotai-state",
+    "type": "addon",
+    "files": [
+        {
+            "source": "frontend/modules/state-management/jotai/src/atoms/index.ts",
+            "destination": "src/atoms/index.{{#if typescript}}ts{{else}}js{{/if}}",
+            "type": "template"
+        }
+    ],
+    "dependencies": {
+        "prod": {
+            "jotai": "^2.6.0"
+        },
+        "dev": {}
+    },
+    "scripts": {},
+    "postInstall": [
+        "Jotai atoms are in src/atoms/"
+    ]
+}
